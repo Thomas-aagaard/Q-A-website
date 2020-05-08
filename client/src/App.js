@@ -53,7 +53,6 @@ class App extends Component {
     }
 
     async postAnswer(id, text) {
-        var s= 2;
         const votes = 0;
         console.log("postAnswer", 'id:' + id, ' answer:' + text, ' Votes:' + votes);
         const url = `${this.API_URL}/questions/${id}/answers`;
