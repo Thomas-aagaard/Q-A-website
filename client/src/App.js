@@ -74,6 +74,8 @@ class App extends Component {
     GetQuestion(_id) {
         return this.state.questions.find(k => k._id === _id);
     }
+/// Does it work
+
 
 // Render is used for showing all data. In the render you are defining what the render should return, (what to show).
     render() {
