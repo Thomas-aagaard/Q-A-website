@@ -53,6 +53,7 @@ class App extends Component {
     }
 
     async postAnswer(id, text) {
+        var s= 2;
         const votes = 0;
         console.log("postAnswer", 'id:' + id, ' answer:' + text, ' Votes:' + votes);
         const url = `${this.API_URL}/questions/${id}/answers`;
@@ -74,7 +75,6 @@ class App extends Component {
     GetQuestion(_id) {
         return this.state.questions.find(k => k._id === _id);
     }
-/// Does it work
 
 
 // Render is used for showing all data. In the render you are defining what the render should return, (what to show).
