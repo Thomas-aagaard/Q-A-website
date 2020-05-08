@@ -52,9 +52,9 @@ class App extends Component {
         })
     }
 
-    async postAnswer(id, answers) {
+    async postAnswer(id, text) {
         const votes = 0;
-        console.log("postAnswer", 'id:' + id, ' answer:' + answers, ' Votes:' + votes);
+        console.log("postAnswer", 'id:' + id, ' answer:' + text, ' Votes:' + votes);
         const url = `${this.API_URL}/questions/${id}/answers`;
 
         const response = await fetch(url, {
@@ -63,29 +63,13 @@ class App extends Component {
             },
             method: 'POST',
             body: JSON.stringify({
-               answers: [{text:answers, votes:votes}]
+               answers: [{text:text, votes:votes}]
             })
         });
         const json = await response.json();
 
         console.log("Printing the response:", json);
     }
-  /*  async changeDone(id) {
-        const ques = this.state.questions.find(q => q._id === _id);
-        const response = await fetch(`${this.API_URL}/questions/${id}/answers`+id , {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            method: 'PUT',
-            body: JSON.stringify({
-                vote: !ques.vote
-            })
-        });
-        const data = await response.json();
-        console.log("Printing the response:", data);
-        this.GetData();
-    }
-*/
 
     GetQuestion(_id) {
         return this.state.questions.find(k => k._id === _id);

@@ -24,13 +24,12 @@ export default class Question extends Component {
                 <h3>Answers</h3>
                 <ul>
                     {answers}
-                    <input id={this.props.answers} /*onChange={() => this.props.changeDone(this.props.questions._id)}*/
-                           type="checkbox"/>
+
                 </ul>
 
                 <br/>
                 {/* PostAnswer */}
-                <PostAnswer id={this.props.id} postAnswer={(id, text, votes) => this.props.postAnswer(id, text, votes)}/>
+                <PostAnswer id={this.props.id} postAnswer={(id, text) => this.props.postAnswer(id, text)}/>
 
                 <br/> <br/>
 
