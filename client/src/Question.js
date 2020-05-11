@@ -15,7 +15,7 @@ export default class Question extends Component {
         // if question is empty then replace the question with "loading" see variable content above
         if (question) {
             content = question.question;
-            answers = question.answers.map(a => <li key={a}>{a.text}<strong> { "Votes: "}</strong>{ a.votes}</li>);
+            answers = question.answers.map(a => <li key={a}><strong> { "Answers: "}</strong>{a.text}<strong> { "Votes: "}</strong>{ a.votes}</li>);
         }
 
         return (

@@ -10,7 +10,6 @@ class App extends Component {
     // The first file is only used in production.
     API_URL = process.env.REACT_APP_API_URL;
 
-
     constructor(props) {
         super(props);
 
@@ -53,8 +52,7 @@ class App extends Component {
     }
 
     async postAnswer(id, text) {
-        const votes = 0;
-        console.log("postAnswer", 'id:' + id, ' answer:' + text, ' Votes:' + votes);
+        console.log("postAnswer", 'id:' + id, ' answer:' + text);
         const url = `${this.API_URL}/questions/${id}/answers`;
 
         const response = await fetch(url, {
@@ -63,7 +61,7 @@ class App extends Component {
             },
             method: 'POST',
             body: JSON.stringify({
-               answers: [{text:text, votes:votes}]
+               answers: text
             })
         });
         const json = await response.json();
@@ -83,7 +81,7 @@ class App extends Component {
                 <h2>Question and Answers website</h2>
                 <Router>
                     <Questions path="/" data={this.state.questions}></Questions>
-                    <Question path="/question/:id" GetQuestion={(id) => this.GetQuestion(id)} addQuestion={(question) => this.addQuestion(question)} postAnswer={(id, answers) => this.postAnswer(id, answers)}></Question>
+                    <Question path="/question/:id" GetQuestion={(id) => this.GetQuestion(id)} addQuestion={(question) => this.addQuestion(question)} postAnswer={(id, text) => this.postAnswer(id, text)}></Question>
                 </Router>
 
                 <AskQuestion addQuestion={(question) => this.addQuestion(question)}/>

@@ -50,7 +50,7 @@ app.post('/api/questions', async (req, res) => {
 
 app.post('/api/questions/:id/answers', async (req, res) => {
   const id = req.params.id;
-  const answers = {text:req.body.answers, votes:0}
+  const answers = {text:req.body.answers, votes:0};
 
   const updatedQuestion = await questionDB.addAnswer(id, answers);
   await res.json(updatedQuestion);
