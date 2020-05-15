@@ -15,7 +15,6 @@ class Answer extends Component{
         }
     }
 
-
     async GetData() {
         let url = `${this.API_URL}/questions`; // URL of the API.
 
