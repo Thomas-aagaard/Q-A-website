@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from "@reach/router";
 import PostAnswer from "./PostAnswer";
+import Answer from "./Answer";
 
 
 export default class Question extends Component {
@@ -26,7 +27,7 @@ export default class Question extends Component {
                     {answers}
 
                 </ul>
-
+                <Answer id={this.props.id} AddVoting={(id, votes) => this.AddVoting(id, votes)}/>
                 <br/>
                 {/* PostAnswer */}
                 <PostAnswer id={this.props.id} postAnswer={(id, text) => this.props.postAnswer(id, text)}/>

@@ -68,10 +68,29 @@ class App extends Component {
 
         console.log("Printing the response:", json);
     }
+    async AddVoting(id, votes) {
+        console.log("postAnswer", 'id:' + id, ' answer:' + votes);
+        const url = `${this.API_URL}/questions/${id}/answers/${id}/votes`;
+       // const answerID = this.state.questions.answers.find((k => k._id === _id));
+
+        const response = await fetch(url, {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            body: JSON.stringify({
+                votes: votes
+            })
+        });
+        const json = await response.json();
+
+        console.log("Printing the response:", json);
+    }
 
     GetQuestion(_id) {
         return this.state.questions.find(k => k._id === _id);
     }
+
 
 
 // Render is used for showing all data. In the render you are defining what the render should return, (what to show).
@@ -81,7 +100,7 @@ class App extends Component {
                 <h2>Question and Answers website</h2>
                 <Router>
                     <Questions path="/" data={this.state.questions}></Questions>
-                    <Question path="/question/:id" GetQuestion={(id) => this.GetQuestion(id)} addQuestion={(question) => this.addQuestion(question)} postAnswer={(id, text) => this.postAnswer(id, text)}></Question>
+                    <Question path="/question/:id" GetQuestion={(id) => this.GetQuestion(id)} addQuestion={(question) => this.addQuestion(question)} postAnswer={(id, text) => this.postAnswer(id, text)} AddVoting={(id, votes) => this.AddVoting (id, votes)}></Question>
                 </Router>
 
                 <AskQuestion addQuestion={(question) => this.addQuestion(question)}/>

@@ -1,49 +1,73 @@
-import React, {Component} from "react";
+import React,{Component} from 'react';
 
+class Answer extends Component{
 
-export default class Answer extends Component {
+    // API url from the file '.env' OR the file '.env.development'.
+    // The first file is only used in production.
+    API_URL = process.env.REACT_APP_API_URL;
 
-    constructor(props) {
+    constructor(props){
         super(props);
-
         this.state = {
-            input: ""
-        };
+            answers : [
+                {votes:0}
+            ]
+        }
     }
-    handleChange(event) {
+
+
+    async GetData() {
+        let url = `${this.API_URL}/questions`; // URL of the API.
+
+        let result = await fetch(url); // Get the data
+        let json = await result.json(); // Turn it into json
+        return this.setState({ // Set it in the state
+            questions: json
+        })
+    }
+    vote (i) {
+        let newVote = [...this.state.answers];
+        newVote[i].votes++;
+        function swap(array, i, j) {
+            let temp = array[i];
+            array[i] = array[j];
+            array[j] = temp;
+        }
+        this.setState({answers: newVote});
+    }
+    onChange(event) {
         this.setState({
-            [event.target.name]: event.target.value
+            votes: this.vote()
         });
     }
     onSubmit(event) {
-        this.props.postAnswer(this.props.id, this.state.input);
+        this.props.AddVoting(this.props.id, this.prop.votes
+    );
     }
-    async GetData() {
-        const url = 'http://localhost:8080/api/questions';
-        const response = await fetch(url);
-        const data = await response.json();
-        // setting the data and insert in our empty array tasks
-        this.setState({
-            questions: data
-        });}
 
 
-
-
-
-    render() {
+    render(){
         return(
             <>
-                <label htmlFor="post-Answer">
-                    Get you questions answered
-                </label>
-                <input id="post-Answer" name="input" onChange={event => this.handleChange(event)} type="text"/>
-                <button onClick={_ => this.onSubmit()}>Post Answer</button>
+                <div className="answers">
+                    {
+                        this.state.answers.map((lang, i) =>
+                            <div key={i} className="answers">
+                                <div className="voteCount">
+                                    {lang.votes}
+                                </div>
+                                <div>
+                                </div>
+                                 <button onClick={_ => this.onSubmit()}>GIVE A VOTE</button>
+                                <button onClick={this.vote.bind(this, i)}>Click Here</button>
 
-
+                            </div>
+                        )
+                    }
+                </div>
 
             </>
         );
     }
-
 }
+export default Answer;
