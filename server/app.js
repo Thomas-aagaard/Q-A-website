@@ -56,11 +56,18 @@ app.post('/api/questions/:id/answers', async (req, res) => {
   await res.json(updatedQuestion);
 });
 
+app.put('/api/questions/:id/answers/:aid', async (req,res) => {
+    const id = req.params.id;
+    const aid = req.params.aid;
+    const updatedQuestion = await questionDB.addVote(id, aid);
+    await res.json(updatedQuestion);
+});
+
 // PostAnswer
 /*app.post('/api/questions/:id/answer', (req, res) => {
   const id = parseInt(req.params.id);
   const text = req.body.text;
-  const question = data.find(q => q.id === id);
+  const question = data.find(q => q.id === id);hhh
   question.answer.push(text);  // added text
   console.log(question);
   res.json({msg: "Answer added", question: question});

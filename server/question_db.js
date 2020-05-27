@@ -59,9 +59,22 @@ class Db {
         }
     }
 
+    async addVote(id, aid) {
+        try  {
+            const question = await this.getQuestion(id);
+            const answer = question.answers.id(aid);
+            answer.votes++;
+            return await question.save();
+        }
+        catch (error) {
+            console.error("You didnt vote answers:", error.message);
+            return {};
+        }
+    }
+
     /**
      * This method adds a bunch of test data if the database is empty.
-     * @param count The amount of question to add.
+     * @param count The amount of question to add...
      * @returns {Promise} Resolves when everything has been saved.
      */
     async bootstrap(count = 10) {
