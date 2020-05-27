@@ -24,7 +24,7 @@ class Answer extends Component{
             <>
                 <ul>{}</ul>
 
-                <button onClick={_ => this.onSubmit()}>GIVE A VOTE</button>
+
             </>
         );
     }
